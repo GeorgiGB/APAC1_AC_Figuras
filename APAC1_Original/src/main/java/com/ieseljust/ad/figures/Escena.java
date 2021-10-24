@@ -9,6 +9,8 @@ import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 
 class Escena implements Serializable{
+    //preguntrar por el getdimensionsastext se importa solo
+    public int getDimensionsASText;
     // L'escena tindrà unes dimensions.
     // Aquesta valor ens determinaran el marc per dibuixar posteriorment.
     private int tamX;
@@ -114,7 +116,15 @@ class Escena implements Serializable{
         // gc.fillText("text", 100, 100);
 
         
-    };
+    }
+
+    public Escena(int getDimensionsASText) {
+        this.getDimensionsASText = getDimensionsASText;
+    }
+
+    public String getDimensionsASText(){
+        return "Dimensions " + this.getX() +" "+this.getY();
+    }
 
     
 }

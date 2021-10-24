@@ -133,6 +133,25 @@ class FileManager {
         // Comentar o elimina aquestes línies quan implementeu el mètode
         Escena escena = null;
 
+        FileInputStream fis = null;
+
+        try{
+            fis = new FileInputStream(file);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+
+            while (fis.available()> 0){
+                Figura f = (Figura) ois.readObject();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try{
+                fis.close(); //cerrar el FileInputStream
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         return escena;
 
     }
@@ -147,6 +166,25 @@ class FileManager {
          */
         // Comentar o elimina aquestes línies quan implementeu el mètode
         boolean out = false;
+        FileWriter fw = null;
+
+        try{
+            fw = new FileWriter(file);
+            BufferedWriter bfw = new BufferedWriter(fw);
+            bfw.write(escena.getDimensionsASText + "\n");//recoge lo escrito del file
+
+            for (Figura f : escena.LlistaFigures){
+                bfw.write(f.getAsText() + "\n");
+            }
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+        }finally {
+            try{
+                fw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         return out;
 
